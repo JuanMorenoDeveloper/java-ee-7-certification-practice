@@ -6,5 +6,5 @@ This workspace consists of Java EE 8 Samples and unit tests for the Oracle certi
 
 ## Requirements
 
-* Java 8
+* Java 11
 * Maven 3.8.1
