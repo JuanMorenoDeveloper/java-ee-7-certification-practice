@@ -1,5 +1,6 @@
-package uy.proitc.jpa.domain;
+package uy.proitc.jpa.entity;
 
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -59,5 +60,22 @@ public class Person {
         ", name='" + name + '\'' +
         ", address='" + address + '\'' +
         '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Person person = (Person) o;
+    return Objects.equals(id, person.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return 31;
   }
 }
