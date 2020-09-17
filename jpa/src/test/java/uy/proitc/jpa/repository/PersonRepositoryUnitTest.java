@@ -8,16 +8,15 @@ import javax.ejb.EJB;
 import org.apache.openejb.jee.EjbJar;
 import org.apache.openejb.jee.StatelessBean;
 import org.apache.openejb.jee.jpa.unit.PersistenceUnit;
+import org.apache.openejb.junit.ApplicationComposer;
 import org.apache.openejb.testing.Configuration;
 import org.apache.openejb.testing.Module;
-import org.apache.openejb.testing.SingleApplicationComposerRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uy.proitc.jpa.entity.Person;
 
-//@RunWith(ApplicationComposer.class)
-@RunWith(SingleApplicationComposerRunner.class)
-public class PersonRepositoryIT {
+@RunWith(ApplicationComposer.class)
+public class PersonRepositoryUnitTest {
 
   @EJB
   private PersonRepository personRepository;
