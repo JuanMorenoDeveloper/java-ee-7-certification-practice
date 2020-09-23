@@ -13,9 +13,9 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>jpa</artifactId>
-  <packaging>jar</packaging>
-  <name>Java EE 8 Samples: JPA</name>
+  <artifactId>ejb</artifactId>
+  <packaging>war</packaging>
+  <name>Java EE 8 Samples: EJB</name>
 
   <dependencies>
     <dependency>
@@ -43,6 +43,11 @@
       <artifactId>hibernate-core</artifactId>
       <version>${hibernate-core.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>uy.com.proitc</groupId>
+      <artifactId>jpa</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <build>

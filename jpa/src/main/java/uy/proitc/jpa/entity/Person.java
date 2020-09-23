@@ -1,11 +1,14 @@
 package uy.proitc.jpa.entity;
 
+import static uy.proitc.jpa.entity.Person.findById;
+
 import java.time.LocalDate;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
@@ -13,7 +16,10 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 @Entity
+@NamedQuery(name = findById, query = "select p from Person p where p.id=:id")
 public class Person {
+
+  public static final String findById = "Person.findById";
 
   @Id
   @SequenceGenerator(name = "person_sequence", sequenceName = "person_sequence", allocationSize = 1)
@@ -33,17 +39,20 @@ public class Person {
   @Past
   private LocalDate birthday;
 
+  private Location location;
+
   public Person() {
   }
 
   public Person(Integer id, Integer version,
-      @NotNull String name, @NotNull String address,
-      @Past LocalDate birthday) {
+      @NotNull @Size(min = 3, max = 40, message = "{prod.name}") String name,
+      @NotNull String address, @Past LocalDate birthday, Location location) {
     this.id = id;
     this.version = version;
     this.name = name;
     this.address = address;
     this.birthday = birthday;
+    this.location = location;
   }
 
   public Integer getId() {
@@ -86,15 +95,24 @@ public class Person {
     this.version = version;
   }
 
+  public Location getLocation() {
+    return location;
+  }
+
+  public void setLocation(Location location) {
+    this.location = location;
+  }
+
   @Override
   public String toString() {
     return "Person{" +
-           "id=" + id +
-           ", version=" + version +
-           ", name='" + name + '\'' +
-           ", address='" + address + '\'' +
-           ", birthday=" + birthday +
-           '}';
+        "id=" + id +
+        ", version=" + version +
+        ", name='" + name + '\'' +
+        ", address='" + address + '\'' +
+        ", birthday=" + birthday + '\'' +
+        ", location=" + location +
+        '}';
   }
 
   @Override

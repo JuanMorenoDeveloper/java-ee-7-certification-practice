@@ -6,8 +6,13 @@ import static org.assertj.core.api.ThrowableAssert.catchThrowable;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 import javax.ejb.EJB;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 import org.apache.openejb.jee.EjbJar;
 import org.apache.openejb.jee.StatelessBean;
@@ -15,8 +20,11 @@ import org.apache.openejb.jee.jpa.unit.PersistenceUnit;
 import org.apache.openejb.junit.ApplicationComposer;
 import org.apache.openejb.testing.Configuration;
 import org.apache.openejb.testing.Module;
+import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import uy.proitc.jpa.converter.LocationConverter;
+import uy.proitc.jpa.entity.Location;
 import uy.proitc.jpa.entity.Person;
 
 @RunWith(ApplicationComposer.class)
@@ -24,6 +32,16 @@ public class PersonRepositoryUnitTest {
 
   @EJB
   private PersonRepository personRepository;
+
+  @PersistenceContext(name = "TEST_PU")
+  private EntityManager entityManager;
+
+  @Test
+  public void whenFindById_thenGetPerson() {
+    Optional<Person> person = personRepository.findById(1001);
+
+    assertThat(person).isNotEmpty();
+  }
 
   @Test
   public void whenFindAll_thenGetTwoPersons() {
@@ -36,7 +54,7 @@ public class PersonRepositoryUnitTest {
   @Test
   public void whenSavePersonWithInvalidDateAndAddress_thenThrowsConstraintValidationExceptions() {
     Person person = new Person(null, null, "Ad", "Address",
-        LocalDate.of(LocalDate.now().getYear() + 1, 12, 12));
+        LocalDate.of(LocalDate.now().getYear() + 1, 12, 12), new Location(2.3, 4.5));
 
     Throwable exception = catchThrowable(() -> personRepository.save(person));
 
@@ -61,6 +79,7 @@ public class PersonRepositoryUnitTest {
     unit.setProperty("hibernate.show_sql", "true");
     unit.setProperty("hibernate.format_sql", "true");
     unit.getClazz().add(Person.class.getName());
+    unit.getClazz().add(LocationConverter.class.getName());
     return unit;
   }
 

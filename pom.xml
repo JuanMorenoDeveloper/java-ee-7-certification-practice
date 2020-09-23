@@ -25,6 +25,7 @@
 
   <modules>
     <module>jpa</module>
+    <module>ejb</module>
   </modules>
 
   <dependencyManagement>

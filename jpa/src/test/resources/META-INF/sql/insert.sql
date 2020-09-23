@@ -1,2 +1,2 @@
-INSERT INTO person (id, name, address,birthday,version) VALUES (1002, 'Arjan', 'abc', '1986-09-09',1)
-INSERT INTO person (id, name, address,birthday,version) VALUES (1001, 'Gaurav', 'xyz','1990-10-09',1)
+INSERT INTO person (id, name, address,birthday,version,location) VALUES (1002, 'Arjan', 'abc', '1986-09-09',2,'-34.90328,-56.18816')
+INSERT INTO person (id, name, address,birthday,version,location) VALUES (1001, 'Gaurav', 'xyz','1990-10-09',2,'-34.047218,-53.541269')
