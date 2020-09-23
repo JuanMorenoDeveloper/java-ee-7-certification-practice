@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.validation.Valid;
 import uy.proitc.jpa.entity.Person;
 
 @Stateless
@@ -25,5 +26,9 @@ public class PersonRepository {
     Stream<Person> persons = entityManager.createQuery(criteriaQuery)
         .getResultStream();
     return persons.collect(Collectors.toList());
+  }
+
+  public void save(@Valid Person person) {
+    entityManager.persist(person);
   }
 }

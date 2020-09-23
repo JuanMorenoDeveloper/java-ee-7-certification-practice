@@ -1,2 +1,2 @@
-INSERT INTO person (id, name, address) VALUES (1002, 'Arjan', 'abc')
-INSERT INTO person (id, name, address) VALUES (1001, 'Gaurav', 'xyz')
+INSERT INTO person (id, name, address,birthday,version) VALUES (1002, 'Arjan', 'abc', '1986-09-09',1)
+INSERT INTO person (id, name, address,birthday,version) VALUES (1001, 'Gaurav', 'xyz','1990-10-09',1)
