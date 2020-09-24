@@ -16,17 +16,17 @@ import javax.jms.TextMessage;
 public class JmsConsumer implements MessageListener {
 
   private static Logger LOG = Logger.getLogger(JmsConsumer.class.getName());
-  private static boolean ok = false;
+  private static boolean received = false;
 
-  public static boolean sync() {
-    return ok;
+  public static boolean isReceived() {
+    return received;
   }
 
   @Override
   public void onMessage(final Message message) {
     try {
-      String text = ((TextMessage) message).getText();
-      ok = message instanceof TextMessage && !text.isEmpty();
+      String text = message.getBody(String.class);
+      received = !text.isEmpty();
       LOG.info(String.format("Receiving %s", text));
     } catch (final JMSException e) {
       LOG.log(Level.SEVERE, String.format("Error processing message %s", message), e);
