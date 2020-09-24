@@ -24,7 +24,7 @@ public class JmsUnitTest {
 
   @Test
   public void whenSendMessage_thenReceive() {
-    producer.sendMessage();
+    producer.sendMessage("Test");
 
     await()
         .untilAsserted(() -> assertThat(JmsConsumer.sync()).isTrue());

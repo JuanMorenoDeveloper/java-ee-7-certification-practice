@@ -15,7 +15,6 @@ import javax.jms.TextMessage;
 })
 public class JmsConsumer implements MessageListener {
 
-  public static final String TEXT = "foo";
   private static Logger LOG = Logger.getLogger(JmsConsumer.class.getName());
   private static boolean ok = false;
 
@@ -26,10 +25,11 @@ public class JmsConsumer implements MessageListener {
   @Override
   public void onMessage(final Message message) {
     try {
-      ok = message instanceof TextMessage && TEXT
-          .equals(((TextMessage) message).getText());
+      String text = ((TextMessage) message).getText();
+      ok = message instanceof TextMessage && !text.isEmpty();
+      LOG.info(String.format("Receiving %s", text));
     } catch (final JMSException e) {
-      LOG.log(Level.SEVERE, String.format("Error proccessing message %s", message), e);
+      LOG.log(Level.SEVERE, String.format("Error processing message %s", message), e);
     }
   }
 }

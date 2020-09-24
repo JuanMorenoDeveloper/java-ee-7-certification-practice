@@ -12,8 +12,8 @@ public class JmsProducer {
   private Queue destination;
   private JMSContext context;
 
-  public void sendMessage() {
-    context.createProducer().send(destination, context.createTextMessage(JmsConsumer.TEXT));
+  public void sendMessage(String message) {
+    context.createProducer().send(destination, context.createTextMessage(message));
   }
 
   @Resource(name = "target")
