@@ -1,5 +1,7 @@
-package uy.proitc.scheduled;
+package uy.proitc.jms;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.jms.JMSException;
@@ -11,10 +13,15 @@ import javax.jms.TextMessage;
     @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
     @ActivationConfigProperty(propertyName = "destination", propertyValue = "target")
 })
-public class MDBListener implements MessageListener {
+public class JmsConsumer implements MessageListener {
 
   public static final String TEXT = "foo";
-  public static boolean ok = false;
+  private static Logger LOG = Logger.getLogger(JmsConsumer.class.getName());
+  private static boolean ok = false;
+
+  public static boolean sync() {
+    return ok;
+  }
 
   @Override
   public void onMessage(final Message message) {
@@ -22,11 +29,7 @@ public class MDBListener implements MessageListener {
       ok = message instanceof TextMessage && TEXT
           .equals(((TextMessage) message).getText());
     } catch (final JMSException e) {
-      // no-op
+      LOG.log(Level.SEVERE, String.format("Error proccessing message %s", message), e);
     }
-  }
-
-  public static boolean sync() {
-    return ok;
   }
 }

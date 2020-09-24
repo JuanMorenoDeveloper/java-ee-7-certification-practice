@@ -1,18 +1,11 @@
-package uy.proitc.scheduled;
+package uy.proitc.jms;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.awaitility.Awaitility.await;
 
 import java.util.Properties;
-import javax.annotation.Resource;
-import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
-import javax.jms.JMSException;
-import javax.jms.MessageProducer;
-import javax.jms.Queue;
-import javax.jms.Session;
 import org.apache.openejb.jee.EjbJar;
 import org.apache.openejb.jee.MessageDrivenBean;
 import org.apache.openejb.junit.ApplicationComposer;
@@ -24,25 +17,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(ApplicationComposer.class)
-@Classes(cdi = true)
-public class MDBListenerUnitTest {
+public class JmsUnitTest {
 
-  @Resource(name = "target")
-  private Queue destination;
-
-  @Resource(name = "cf")
-  private ConnectionFactory cf;
+  @Inject
+  JmsProducer producer;
 
   @Test
-  public void whenSendMessage_thenReceive() throws JMSException {
-    try (final Connection connection = cf.createConnection()) {
-      final Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-      final MessageProducer producer = session.createProducer(destination);
-      producer.send(session.createTextMessage(MDBListener.TEXT));
+  public void whenSendMessage_thenReceive() {
+    producer.sendMessage();
 
-      await()
-          .untilAsserted(() -> assertThat(MDBListener.sync()).isTrue());
-    }
+    await()
+        .untilAsserted(() -> assertThat(JmsConsumer.sync()).isTrue());
   }
 
   @Configuration
@@ -60,9 +45,10 @@ public class MDBListenerUnitTest {
   }
 
   @Module
+  @Classes(value = JmsProducer.class, cdi = true)
   public EjbJar beans() {
     EjbJar ejbJar = new EjbJar("timer-beans");
-    ejbJar.addEnterpriseBean(new MessageDrivenBean(MDBListener.class));
+    ejbJar.addEnterpriseBean(new MessageDrivenBean(JmsConsumer.class));
     return ejbJar;
   }
 }

@@ -1,8 +1,7 @@
-package uy.proitc.scheduled;
+package uy.proitc.jms;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
-import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.core.Is.is;
 
 import javax.ejb.EJB;
