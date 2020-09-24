@@ -27,6 +27,7 @@
     <module>jpa</module>
     <module>ejb</module>
     <module>jms</module>
+    <module>jax-ws</module>
   </modules>
 
   <dependencyManagement>

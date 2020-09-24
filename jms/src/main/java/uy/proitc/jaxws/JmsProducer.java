@@ -1,4 +1,4 @@
-package uy.proitc.jms;
+package uy.proitc.jaxws;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;

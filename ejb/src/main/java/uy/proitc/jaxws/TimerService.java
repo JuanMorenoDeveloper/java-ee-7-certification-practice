@@ -1,4 +1,4 @@
-package uy.proitc.jms;
+package uy.proitc.jaxws;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
