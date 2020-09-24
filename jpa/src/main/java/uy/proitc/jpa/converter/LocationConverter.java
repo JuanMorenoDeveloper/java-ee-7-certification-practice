@@ -6,6 +6,7 @@ import uy.proitc.jpa.entity.Location;
 
 @Converter(autoApply = true)
 public class LocationConverter implements AttributeConverter<Location, String> {
+
   @Override
   public String convertToDatabaseColumn(Location attribute) {
     return attribute.toString();

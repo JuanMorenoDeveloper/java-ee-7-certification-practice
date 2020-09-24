@@ -106,13 +106,13 @@ public class Person {
   @Override
   public String toString() {
     return "Person{" +
-        "id=" + id +
-        ", version=" + version +
-        ", name='" + name + '\'' +
-        ", address='" + address + '\'' +
-        ", birthday=" + birthday + '\'' +
-        ", location=" + location +
-        '}';
+           "id=" + id +
+           ", version=" + version +
+           ", name='" + name + '\'' +
+           ", address='" + address + '\'' +
+           ", birthday=" + birthday + '\'' +
+           ", location=" + location +
+           '}';
   }
 
   @Override
