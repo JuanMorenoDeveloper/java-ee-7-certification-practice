@@ -52,6 +52,7 @@ public class DefaultCalculatorUnitTest {
   public void givenClient_whenSum_thenGetResult() throws MalformedURLException {
     uy.proitc.jaxws.client.Calculator client = new CalculatorService(new URL(wsdl))
         .getCalculatorPort();
+
     int result = client.sum(2, 2);
 
     assertThat(result).isEqualTo(4);
