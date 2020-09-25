@@ -4,9 +4,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <properties>
+    <hibernate-core.version>5.4.21.Final</hibernate-core.version>
     <openejb-cxf.version>8.0.4</openejb-cxf.version>
     <okhttp.version>4.9.0</okhttp.version>
-    <cxf-codegen-plugin.version>3.4.0</cxf-codegen-plugin.version>
   </properties>
 
   <parent>
@@ -15,9 +15,9 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>jax-ws</artifactId>
+  <artifactId>websocket</artifactId>
   <packaging>jar</packaging>
-  <name>Java EE 8 Samples: JAX-WS</name>
+  <name>Java EE 8 Samples: Web Socket</name>
 
   <dependencies>
     <dependency>
@@ -44,6 +44,7 @@
       <groupId>org.apache.tomee</groupId>
       <artifactId>openejb-cxf</artifactId>
       <version>${openejb-cxf.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
@@ -53,41 +54,4 @@
     </dependency>
   </dependencies>
 
-  <profiles>
-    <profile>
-      <id>generate-client</id>
-      <activation>
-        <property>
-          <name>generate-client</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-codegen-plugin</artifactId>
-            <version>${cxf-codegen-plugin.version}</version>
-            <executions>
-              <execution>
-                <id>generate-sources</id>
-                <phase>generate-sources</phase>
-                <configuration>
-                  <sourceRoot>src/main/java/</sourceRoot>
-                  <wsdlOptions>
-                    <wsdlOption>
-                      <wsdl>src/main/resources/calculator.wsdl</wsdl>
-                      <wsdlLocation>classpath:calculator.wsdl</wsdlLocation>
-                    </wsdlOption>
-                  </wsdlOptions>
-                </configuration>
-                <goals>
-                  <goal>wsdl2java</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>

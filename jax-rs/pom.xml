@@ -44,7 +44,6 @@
       <groupId>org.apache.tomee</groupId>
       <artifactId>openejb-cxf</artifactId>
       <version>${openejb-cxf.version}</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>

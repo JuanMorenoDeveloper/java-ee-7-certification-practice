@@ -29,6 +29,14 @@
     <module>jms</module>
     <module>jax-ws</module>
     <module>jax-rs</module>
+    <module>servlet</module>
+    <module>jsp</module>
+    <module>jsf</module>
+    <module>websocket</module>
+    <module>batch-concurrency</module>
+    <module>cdi</module>
+    <module>logging</module>
+    <module>security</module>
   </modules>
 
   <dependencyManagement>
