@@ -39,7 +39,7 @@ public class DefaultCalculatorUnitTest {
   @Test
   public void whenSum_thenGetResult() throws MalformedURLException {
     final Service service = Service.create(
-        new URL("http://127.0.0.1:" + JAX_WS_PORT + "/demo/calculator?wsdl"),
+        new URL(wsdl),
         new QName("http://jaxws.proitc.uy/wsdl", "CalculatorService"));
     final Calculator calc = service.getPort(Calculator.class);
 
@@ -69,7 +69,7 @@ public class DefaultCalculatorUnitTest {
   public void whenQueryForWsdl_thenGetExpectedName() throws IOException {
     OkHttpClient client = new OkHttpClient();
     Request request = new Request.Builder()
-        .url("http://127.0.0.1:" + JAX_WS_PORT + "/demo/calculator?wsdl")
+        .url(wsdl)
         .build();
     StringBuilder wsdl = new StringBuilder();
 
