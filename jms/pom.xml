@@ -6,6 +6,7 @@
   <properties>
     <hibernate-core.version>5.4.21.Final</hibernate-core.version>
     <awaitility.version>3.0.0</awaitility.version>
+    <openejb-cxf.version>8.0.4</openejb-cxf.version>
   </properties>
 
   <parent>
@@ -40,21 +41,15 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.apache.tomee</groupId>
+      <artifactId>openejb-cxf</artifactId>
+      <version>${openejb-cxf.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.awaitility</groupId>
       <artifactId>awaitility</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven-compiler-plugin.version}</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven-surefire-plugin.version}</version>
-      </plugin>
-    </plugins>
-  </build>
 </project>
