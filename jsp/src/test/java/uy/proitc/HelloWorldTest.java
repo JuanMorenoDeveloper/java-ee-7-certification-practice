@@ -1,5 +1,8 @@
 package uy.proitc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
+
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.File;
@@ -9,37 +12,23 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
-
 @RunWith(Arquillian.class)
-public class DemoTest {
+public class HelloWorldTest {
 
   @ArquillianResource
   private URL baseUrl;
 
-  private WebClient webClient;
 
   @RunAsClient
   @Test
-  public void testHelloWorld() throws Exception {
-    HtmlPage page = webClient.getPage(baseUrl);
-    assertThat(page.asXml()).contains("Hello World!");
-  }
-
-  @Before
-  public void before() {
-    webClient = new WebClient();
-  }
-
-  @After
-  public void after() {
-    webClient.close();
+  public void whenGetIndexPage_thenGetHelloWorld() throws Exception {
+    try (var webClient = new WebClient()) {
+      HtmlPage page = webClient.getPage(baseUrl);
+      assertThat(page.asXml()).contains("Hello World!");
+    }
   }
 
   @Deployment
