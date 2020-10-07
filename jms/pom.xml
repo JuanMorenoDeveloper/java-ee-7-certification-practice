@@ -5,7 +5,6 @@
   <modelVersion>4.0.0</modelVersion>
   <properties>
     <hibernate-core.version>5.4.21.Final</hibernate-core.version>
-    <awaitility.version>3.0.0</awaitility.version>
     <openejb-cxf.version>8.0.4</openejb-cxf.version>
   </properties>
 
