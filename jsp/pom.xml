@@ -9,6 +9,9 @@
     <arquillian-tomee-embedded.version>8.0.4</arquillian-tomee-embedded.version>
     <htmlunit.version>2.44.0</htmlunit.version>
     <tomee-javaee-api.version>8.0-4</tomee-javaee-api.version>
+    <graphene-webdriver.version>2.3.2</graphene-webdriver.version>
+    <arquillian-drone-bom.version>2.5.1</arquillian-drone-bom.version>
+    <arquillian-bom.version>1.6.0.Final</arquillian-bom.version>
   </properties>
 
   <parent>
@@ -20,6 +23,27 @@
   <artifactId>jsp</artifactId>
   <packaging>war</packaging>
   <name>Java EE 8 Samples: JSP</name>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Arquillian Core dependencies -->
+      <dependency>
+        <groupId>org.jboss.arquillian</groupId>
+        <artifactId>arquillian-bom</artifactId>
+        <version>${arquillian-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- Arquillian Drone dependencies and WebDriver/Selenium dependencies -->
+      <dependency>
+        <groupId>org.jboss.arquillian.extension</groupId>
+        <artifactId>arquillian-drone-bom</artifactId>
+        <version>${arquillian-drone-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <!--Java EE apis for Tomee-->
@@ -63,11 +87,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>net.sourceforge.htmlunit</groupId>
-      <artifactId>htmlunit</artifactId>
-      <version>${htmlunit.version}</version>
+      <groupId>org.jboss.arquillian.graphene</groupId>
+      <artifactId>graphene-webdriver</artifactId>
+      <version>${graphene-webdriver.version}</version>
+      <type>pom</type>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 </project>
