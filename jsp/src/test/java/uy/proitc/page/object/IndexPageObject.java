@@ -1,4 +1,4 @@
-package uy.proitc;
+package uy.proitc.page.object;
 
 import org.jboss.arquillian.graphene.page.Location;
 import org.openqa.selenium.WebElement;
