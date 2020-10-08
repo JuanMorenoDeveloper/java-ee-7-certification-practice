@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <properties>
     <hibernate-core.version>5.4.21.Final</hibernate-core.version>
-    <openejb-cxf.version>8.0.4</openejb-cxf.version>
+    <openejb-http.version>8.0.4</openejb-http.version>
     <okhttp.version>4.9.0</okhttp.version>
   </properties>
 
@@ -38,6 +38,12 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tomee</groupId>
+      <artifactId>openejb-http</artifactId>
+      <version>${openejb-http.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
