@@ -6,6 +6,7 @@ import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -30,7 +31,7 @@ public class HelloWorldTest {
 
   @RunAsClient
   @Test
-  public void whenGetIndexPage_thenGetHelloWorld() throws Exception {
+  public void whenGetIndexPage_thenGetHelloWorld() throws IOException {
     try (var webClient = new WebClient()) {
       HtmlPage page = webClient.getPage(baseUrl);
       assertThat(page.asXml()).contains("Hello World!");
@@ -39,7 +40,7 @@ public class HelloWorldTest {
 
   @RunAsClient
   @Test
-  public void whenGetIndexPageWithDrone_thenGetHelloWorld() throws Exception {
+  public void whenGetIndexPageWithDrone_thenGetHelloWorld() {
     browser.get(baseUrl.toExternalForm() + "/index.jsp");
     assertThat(index.getH1().getText()).contains("Hello World!");
   }

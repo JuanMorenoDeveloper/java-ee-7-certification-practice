@@ -5,7 +5,6 @@
   <modelVersion>4.0.0</modelVersion>
   <properties>
     <openejb-cxf.version>8.0.4</openejb-cxf.version>
-    <okhttp.version>4.9.0</okhttp.version>
     <cxf-codegen-plugin.version>3.4.0</cxf-codegen-plugin.version>
   </properties>
 
@@ -44,12 +43,6 @@
       <groupId>org.apache.tomee</groupId>
       <artifactId>openejb-cxf</artifactId>
       <version>${openejb-cxf.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.squareup.okhttp3</groupId>
-      <artifactId>okhttp</artifactId>
-      <version>${okhttp.version}</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 

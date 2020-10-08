@@ -4,15 +4,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
-import java.util.Objects;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.Properties;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import javax.xml.ws.WebServiceRef;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import org.apache.openejb.jee.WebApp;
 import org.apache.openejb.junit.ApplicationComposer;
 import org.apache.openejb.testing.Classes;
@@ -22,13 +22,14 @@ import org.apache.openejb.testing.Module;
 import org.apache.openejb.testng.PropertiesBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import uy.proitc.jaxws.client.CalculatorService;
 import uy.proitc.jaxws.server.Calculator;
 import uy.proitc.jaxws.server.DefaultCalculator;
-import uy.proitc.jaxws.client.CalculatorService;
 
 @EnableServices("jax-ws")
 @RunWith(ApplicationComposer.class)
 public class DefaultCalculatorUnitTest {
+
   private static final int JAX_WS_PORT = 9090;//NetworkUtil.getNextAvailablePort();
 
   private static final String wsdl = "http://127.0.0.1:" + JAX_WS_PORT + "/demo/calculator?wsdl";
@@ -66,18 +67,15 @@ public class DefaultCalculatorUnitTest {
   }
 
   @Test
-  public void whenQueryForWsdl_thenGetExpectedName() throws IOException {
-    OkHttpClient client = new OkHttpClient();
-    Request request = new Request.Builder()
-        .url(wsdl)
+  public void whenQueryForWsdl_thenGetExpectedName() throws IOException, InterruptedException {
+    HttpClient client = HttpClient.newHttpClient();
+    HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create(wsdl))
         .build();
-    StringBuilder wsdl = new StringBuilder();
 
-    try (Response response = client.newCall(request).execute()) {
-      wsdl.append(Objects.requireNonNull(response.body()).string());
-    }
+    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-    assertThat(wsdl).contains("name=\"CalculatorService\"");
+    assertThat(response.body()).contains("name=\"CalculatorService\"");
   }
 
   @Configuration
