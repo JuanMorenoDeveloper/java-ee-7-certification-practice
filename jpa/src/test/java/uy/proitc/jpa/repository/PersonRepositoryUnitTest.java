@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 import javax.ejb.EJB;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
 import org.apache.openejb.jee.EjbJar;
 import org.apache.openejb.jee.StatelessBean;
@@ -29,9 +27,6 @@ public class PersonRepositoryUnitTest {
 
   @EJB
   private PersonRepository personRepository;
-
-  @PersistenceContext(name = "TEST_PU")
-  private EntityManager entityManager;
 
   @Test
   public void whenFindById_thenGetPerson() {
