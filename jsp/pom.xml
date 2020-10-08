@@ -7,7 +7,6 @@
     <openejb-cxf.version>8.0.4</openejb-cxf.version>
     <okhttp.version>4.9.0</okhttp.version>
     <arquillian-tomee-embedded.version>8.0.4</arquillian-tomee-embedded.version>
-    <htmlunit.version>2.44.0</htmlunit.version>
     <tomee-javaee-api.version>8.0-4</tomee-javaee-api.version>
     <graphene-webdriver.version>2.3.2</graphene-webdriver.version>
     <arquillian-drone-bom.version>2.5.1</arquillian-drone-bom.version>
