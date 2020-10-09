@@ -9,9 +9,12 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Properties;
-import javax.annotation.Resource;
-import javax.enterprise.concurrent.ManagedExecutorService;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.BadRequestException;
+import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.MediaType;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.openejb.jee.WebApp;
@@ -28,6 +31,8 @@ import org.junit.runner.RunWith;
 @EnableServices(value = "jaxrs", httpDebug = true)
 @RunWith(ApplicationComposer.class)
 public class ProductEndpointUnitTest {
+
+  private static final Logger log = Logger.getLogger(ProductEndpointUnitTest.class.getName());
 
   private final int port = NetworkUtil.getNextAvailablePort();
 
@@ -118,6 +123,31 @@ public class ProductEndpointUnitTest {
 
     assertThat(result).isEqualTo("OK");
   }
+
+  @Test
+  public void whenPositionOfUsingAsyncClient_thenGetPosition()
+      throws ExecutionException, InterruptedException {
+    final Future<Integer> position = WebClient
+        .create("http://localhost:" + port)
+        .path("demo/api/product/positionOf")
+        .matrix("name", "Flour")
+        .accept(MediaType.APPLICATION_JSON)
+        .async()
+        .get(new InvocationCallback<>() {
+          @Override
+          public void completed(Integer response) {
+            log.info(String.format("Received %d", response));
+          }
+
+          @Override
+          public void failed(Throwable throwable) {
+            log.log(Level.SEVERE, throwable, () -> "Error");
+          }
+        });
+
+    assertThat(position.get()).isEqualTo(1);
+  }
+
 
   @Configuration
   public Properties configuration() {
