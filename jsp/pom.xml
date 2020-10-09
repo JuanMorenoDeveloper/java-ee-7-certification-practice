@@ -5,7 +5,6 @@
   <modelVersion>4.0.0</modelVersion>
   <properties>
     <openejb-cxf.version>8.0.4</openejb-cxf.version>
-    <okhttp.version>4.9.0</okhttp.version>
     <arquillian-tomee-embedded.version>8.0.4</arquillian-tomee-embedded.version>
     <tomee-javaee-api.version>8.0-4</tomee-javaee-api.version>
     <graphene-webdriver.version>2.3.2</graphene-webdriver.version>
@@ -83,12 +82,6 @@
       <groupId>org.apache.tomee</groupId>
       <artifactId>openejb-cxf</artifactId>
       <version>${openejb-cxf.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.squareup.okhttp3</groupId>
-      <artifactId>okhttp</artifactId>
-      <version>${okhttp.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

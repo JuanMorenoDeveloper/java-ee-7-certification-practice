@@ -1,5 +1,6 @@
 package uy.com.proitc.jaxrs;
 
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 import java.io.IOException;
@@ -8,6 +9,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Properties;
+import javax.annotation.Resource;
+import javax.enterprise.concurrent.ManagedExecutorService;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.core.MediaType;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.openejb.jee.WebApp;
@@ -64,6 +68,55 @@ public class ProductEndpointUnitTest {
         .get(Product.class);
 
     assertThat(result).isEqualTo(new Product("Flour"));
+  }
+
+  @Test
+  public void whenExistsByName_thenGetResult() {
+    final boolean exists = WebClient
+        .create("http://localhost:" + port)
+        .path("demo/api/product/exitsByName")
+        .query("name", "Flour")
+        .accept(MediaType.APPLICATION_JSON)
+        .get(Boolean.class);
+
+    assertThat(exists).isTrue();
+  }
+
+  @Test
+  public void whenPositionOf_thenGetPosition() {
+    final int position = WebClient
+        .create("http://localhost:" + port)
+        .path("demo/api/product/positionOf")
+        .matrix("name", "Flour")
+        .accept(MediaType.APPLICATION_JSON)
+        .get(Integer.class);
+
+    assertThat(position).isEqualTo(1);
+  }
+
+  @Test
+  public void whenPositionOfWithNull_thenGetBadRequestException() {
+    Throwable thrown = catchThrowable(() -> {
+      WebClient
+          .create("http://localhost:" + port)
+          .path("demo/api/product/positionOf")
+          .accept(MediaType.APPLICATION_JSON)
+          .get(Integer.class);
+    });
+
+    assertThat(thrown).isInstanceOf(BadRequestException.class).hasMessageContaining("400");
+  }
+
+  @Test
+  public void whenAsyncOperationWithLowSleepTime_thenGetOKResponse() {
+    final String result = WebClient
+        .create("http://localhost:" + port)
+        .path("demo/api/product/asyncOperation")
+        .query("sleepTime", 500)
+        .accept(MediaType.APPLICATION_JSON)
+        .get(String.class);
+
+    assertThat(result).isEqualTo("OK");
   }
 
   @Configuration

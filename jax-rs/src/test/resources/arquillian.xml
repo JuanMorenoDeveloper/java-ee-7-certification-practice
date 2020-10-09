@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arquillian
+>
+  <container qualifier="tomee" default="true">
+    <configuration>
+      <!-- port = -1 means random -->
+      <property name="httpPort">-1</property>
+      <property name="stopPort">-1</property>
+
+      <!-- where to create TomEE files -->
+      <property name="dir">target/tomee-embedded</property>
+
+      <!-- where to dump on disk applications to deploy -->
+      <property name="appWorkingDir">target/working-dir</property>
+
+      <!-- optional - limit the port allowed when random -->
+      <property name="portRange">20001-30000</property>
+
+    </configuration>
+  </container>
+</arquillian>

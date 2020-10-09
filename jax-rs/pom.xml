@@ -3,11 +3,6 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <properties>
-    <openejb-cxf.version>8.0.4</openejb-cxf.version>
-    <tomee-javaee-api.version>8.0-4</tomee-javaee-api.version>
-  </properties>
-
   <parent>
     <groupId>uy.com.proitc</groupId>
     <artifactId>java-ee-7-certification-practice</artifactId>
@@ -18,12 +13,25 @@
   <packaging>war</packaging>
   <name>Java EE 8 Samples: JAX-RS</name>
 
+  <properties>
+    <openejb-cxf.version>8.0.4</openejb-cxf.version>
+    <tomee-javaee-api.version>8.0-4</tomee-javaee-api.version>
+    <arquillian-tomee-embedded.version>8.0.4</arquillian-tomee-embedded.version>
+    <arquillian-bom.version>1.6.0.Final</arquillian-bom.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.tomee</groupId>
       <artifactId>javaee-api</artifactId>
       <version>${tomee-javaee-api.version}</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tomee</groupId>
+      <artifactId>arquillian-tomee-embedded</artifactId>
+      <version>${arquillian-tomee-embedded.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>javax</groupId>
