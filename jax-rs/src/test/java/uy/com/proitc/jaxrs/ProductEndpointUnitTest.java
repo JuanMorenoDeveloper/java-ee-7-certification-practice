@@ -21,7 +21,7 @@ import org.apache.openejb.util.NetworkUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@EnableServices(value = "jaxrs")//, httpDebug = true)
+@EnableServices(value = "jaxrs", httpDebug = true)
 @RunWith(ApplicationComposer.class)
 public class ProductEndpointUnitTest {
 
@@ -30,7 +30,7 @@ public class ProductEndpointUnitTest {
   @Test
   public void whenFindAllWithMediaJson_thenGetProductList()
       throws IOException, InterruptedException {
-    String url = String.format("http://localhost:%d/%s", port, "demo/api/products");
+    String url = String.format("http://localhost:%d/%s", port, "demo/api/product");
     HttpClient client = HttpClient.newHttpClient();
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create(url))
@@ -45,11 +45,25 @@ public class ProductEndpointUnitTest {
 
   @Test
   public void whenFindAllWithMediaXML_thenGetProductList() {
-    final String message = WebClient.create("http://localhost:" + port).path("demo/api/products")
-        .accept(MediaType.APPLICATION_XML_TYPE)
+    final String message = WebClient
+        .create("http://localhost:" + port)
+        .path("demo/api/product")
+        .accept(MediaType.APPLICATION_XML)
         .get(String.class);
 
-    assertThat(message).isNotNull().contains("<product><name>Soap</name></product>").contains("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    assertThat(message).isNotNull().contains("<product><name>Soap</name></product>")
+        .contains("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+  }
+
+  @Test
+  public void whenFindById_thenGetProduct() {
+    final Product result = WebClient
+        .create("http://localhost:" + port)
+        .path("demo/api/product/1")
+        .accept(MediaType.APPLICATION_JSON)
+        .get(Product.class);
+
+    assertThat(result).isEqualTo(new Product("Flour"));
   }
 
   @Configuration
