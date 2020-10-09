@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
 
-import java.net.URISyntaxException;
 import java.net.URL;
 import javax.ws.rs.ServiceUnavailableException;
 import javax.ws.rs.core.MediaType;
