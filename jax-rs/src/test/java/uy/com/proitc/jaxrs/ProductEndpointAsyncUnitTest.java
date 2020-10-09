@@ -23,8 +23,7 @@ public class ProductEndpointAsyncUnitTest {
   private URL baseUrl;
 
   @Test
-  public void whenAsyncOperationWithLongSleepTime_thenGetTimeOutResponse()
-      throws URISyntaxException {
+  public void whenAsyncOperationWithLongSleepTime_thenGetTimeOutResponse() {
     Throwable thrown = catchThrowable(() -> {
       WebClient
           .create(baseUrl.toURI())
