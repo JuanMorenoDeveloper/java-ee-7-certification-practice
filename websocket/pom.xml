@@ -3,8 +3,6 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <properties>
-  </properties>
 
   <parent>
     <groupId>uy.com.proitc</groupId>
@@ -16,7 +14,25 @@
   <packaging>jar</packaging>
   <name>Java EE 8 Samples: Web Socket</name>
 
+  <properties>
+    <tomee-javaee-api.version>8.0-4</tomee-javaee-api.version>
+    <arquillian-tomee-embedded.version>8.0.4</arquillian-tomee-embedded.version>
+    <arquillian-bom.version>1.6.0.Final</arquillian-bom.version>
+  </properties>
+
   <dependencies>
+    <dependency>
+      <groupId>org.apache.tomee</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>${tomee-javaee-api.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tomee</groupId>
+      <artifactId>arquillian-tomee-embedded</artifactId>
+      <version>${arquillian-tomee-embedded.version}</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
@@ -30,6 +46,11 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
