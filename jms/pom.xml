@@ -3,11 +3,6 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <properties>
-    <hibernate-core.version>5.4.21.Final</hibernate-core.version>
-    <openejb-cxf.version>8.0.4</openejb-cxf.version>
-  </properties>
-
   <parent>
     <groupId>uy.com.proitc</groupId>
     <artifactId>java-ee-7-certification-practice</artifactId>
@@ -37,12 +32,6 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tomee</groupId>
-      <artifactId>openejb-cxf</artifactId>
-      <version>${openejb-cxf.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
