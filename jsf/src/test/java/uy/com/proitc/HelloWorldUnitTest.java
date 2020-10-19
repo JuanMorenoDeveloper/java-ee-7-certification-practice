@@ -31,7 +31,7 @@ public class HelloWorldUnitTest {
   @Test
   public void whenGetIndexPageWithDrone_thenGetHelloWorld() {
     browser.get(baseUrl.toExternalForm() + "/index.xhtml");
-    assertThat(index.getBody().getText()).contains("Hello, World");
+    assertThat(index.getBody().getText()).contains("Hello, world");
   }
 
   @Deployment
