@@ -17,7 +17,6 @@
     <openejb-cxf.version>8.0.4</openejb-cxf.version>
     <tomee-javaee-api.version>8.0-4</tomee-javaee-api.version>
     <arquillian-tomee-embedded.version>8.0.4</arquillian-tomee-embedded.version>
-    <arquillian-bom.version>1.6.0.Final</arquillian-bom.version>
   </properties>
 
   <dependencies>

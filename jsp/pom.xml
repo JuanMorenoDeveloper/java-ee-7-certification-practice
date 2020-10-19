@@ -79,12 +79,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.tomee</groupId>
-      <artifactId>openejb-cxf</artifactId>
-      <version>${openejb-cxf.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.jboss.arquillian.graphene</groupId>
       <artifactId>graphene-webdriver</artifactId>
       <version>${graphene-webdriver.version}</version>
