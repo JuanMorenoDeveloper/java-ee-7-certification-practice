@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <title>#{searchProduct.title}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet name="css/tacit-css-1.5.1.min.css"/>
+    </h:head>
+    <h:body>
+        <section>
+            <header>
+                <h:outputLabel value="Products"/>
+            </header>
+            <h:form id="search">
+                <h:messages showDetail="true"/>
+                <h:dataTable id="table" var="product" value="#{searchProduct.products}">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        <h:outputLabel value="#{product.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        <h:outputLabel value="#{product.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Details</f:facet>
+                        <h:commandButton id="show" title="Show" value="Show"
+                                         actionListener="#{searchProduct.updateMessages}"
+                                         action="#{searchProduct.showDetails(product.id)}"/>
+                    </h:column>
+                </h:dataTable>
+                <h:outputLabel value="Current details:"/>
+                <strong>
+                    <h:outputLabel id="result" value="#{searchProduct.currentDetails}"/>
+                </strong>
+            </h:form>
+        </section>
+    </h:body>
+</f:view>
+</html>
